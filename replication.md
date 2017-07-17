@@ -29,6 +29,33 @@ CHANGE MASTER TO MASTER_HOST='192.168.1.152',
        MASTER_USER='repl',   
        MASTER_PASSWORD='password',   
        MASTER_LOG_FILE='mysql-bin.000001',   
-       MASTER_LOG_POS=0;  
+       MASTER_LOG_POS=8;  
 ```
-MASTER_LOG_FILE和MASTER_LOG_POS可以通过show master status查看
+MASTER_LOG_FILE和MASTER_LOG_POS可以通过show master status查看  
+开始复制 
+```
+START SLAVE
+```
+
+4. 查看复制状态
+```
+SHOW SLAVE STATUS\G
+```
+可以看到(举例)
+```
+*************************** 1. row ***************************
+
+Slave_IO_State: Waiting for master to send event
+Master_Host: 127.0.0.1
+Master_User: repl
+Master_Port: 3306
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000001
+Read_Master_Log_Pos: 8s     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: mysql-relay-bin.000001
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000001
+Slave_IO_Running: Yes 
+Slave_SQL_Running: Yes 
+```
+当Slave_IO_Running和Slave_SQL_Running都是Yes时,表示复制正在运行
