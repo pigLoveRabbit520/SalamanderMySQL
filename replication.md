@@ -63,11 +63,11 @@ Slave_SQL_Running: Yes
 # 配置主从(有写入数据时，即线上的运行的db)
 1. FLUSH TABLES WITH READ LOCK(FTWRL);
 主数据库锁定所有表操作, 不让数据再进行写入操作。该命令主要用于备份工具获取一致性备份(数据与binlog位点匹配)。由于FTWRL总共需要持有两把全局的MDL锁，并且还需要关闭所有表对象，因此这个命令的杀伤性很大，执行命令时容易导致库hang住。
-FTWRL主要包括3个步骤：
+    FTWRL主要包括3个步骤：
 
-1. 上全局读锁(lock_global_read_lock)
-2. 清理表缓存(close_cached_tables)
-3. 上全局COMMIT锁(make_global_read_lock_block_commit)
+    1. 上全局读锁(lock_global_read_lock)
+    2. 清理表缓存(close_cached_tables)
+    3. 上全局COMMIT锁(make_global_read_lock_block_commit)
 
 2. 查看主数据库的状态
 ```
