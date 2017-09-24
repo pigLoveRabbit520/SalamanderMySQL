@@ -54,6 +54,12 @@ InnoDB 与 MyISAM 的最大不同有两点，一是支持事务（transaction）
 2. 事务隔离级别
 数据库的事务隔离越严格，并发副作用越小，但付出的代价也就越大，因为事务隔离实质上就是使事务在一定程度上“串行化”进行，这显然与“并发”是矛盾的。为了解决“隔离”与“并发”的矛盾，ISO/ANSI SQL92 定义了 4 个事务隔离级别，MySQL 实现了这四种级别，应用可以根据自己的业务逻辑要求，选择合适的隔离级别来平衡“隔离”与“并发”的矛盾。MySQL的默认隔离级别为repeatable read（RR），另外MySQL通过MVCC避免幻读  
 
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
+
  **| 脏读 |   不可重复读 | 幻读
 ----|------|----
 Read  uncommitted | √    |√ |   √
